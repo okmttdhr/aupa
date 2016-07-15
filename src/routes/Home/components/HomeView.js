@@ -1,10 +1,5 @@
-import React from 'react'
-import DuckImage from '../assets/Duck.jpg'
-import classes from './HomeView.scss'
-
 import request from 'superagent'
 import utils from 'utils'
-
 request
   .get(utils.uriSearch().youtube)
   .query({
@@ -16,9 +11,24 @@ request
     console.log(res)
   })
 
-export const HomeView = () => (
+import React from 'react'
+import { connect } from 'react-redux'
+
+import DuckImage from '../assets/Duck.jpg'
+import classes from './HomeView.scss'
+import { doubleAsync } from '../modules/videos'
+
+const mapActionCreators = {
+  doubleAsync
+}
+
+const mapStateToProps = (state) => ({
+  videos: state.videos
+})
+
+export const HomeView = (props) => (
   <div>
-    <h4>Welcome!</h4>
+    <h4>{JSON.stringify(props, '  ')}</h4>
     <img
       alt='This is a duck, because Redux!'
       className={classes.duck}
@@ -26,4 +36,4 @@ export const HomeView = () => (
   </div>
 )
 
-export default HomeView
+export default connect(mapStateToProps, mapActionCreators)(HomeView)
