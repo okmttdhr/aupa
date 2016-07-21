@@ -31,10 +31,10 @@ const mapStateToProps = (state) => ({
 const embedSrcTest = {
   youtube: 'http://www.youtube.com/embed/WSinMOs5eGw',
   giphy: 'http://giphy.com/embed/liBj9iFHAPNMk',
-  vimeo: 'https://player.vimeo.com/video/87742822?title=0&byline=0&portrait=0',
-  facebook: `https://www.facebook.com/plugins/video.php?
+  vimeo: 'http://player.vimeo.com/video/87742822?title=0&byline=0&portrait=0',
+  facebook: `http://www.facebook.com/plugins/video.php?
     href=https%3A%2F%2Fwww.facebook.com%2Fhashlyve%2Fvideos%2F596253087201416%2F&show_text=0&width=400`,
-  vine: 'https://vine.co/v/57tP3HpJuqu/embed/simple',
+  vine: 'http://vine.co/v/57tP3HpJuqu/embed/simple',
 }
 
 export const HomeView = (props) => (
