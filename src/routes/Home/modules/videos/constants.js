@@ -1,4 +1,7 @@
-// ------------------------------------
-// Constants
-// ------------------------------------
-export const COUNTER_INCREMENT = 'COUNTER_INCREMENT'
+import { createRESTConstants } from 'utils'
+
+const RESTConstants = createRESTConstants('VIDEOS')
+
+export default {
+  ...RESTConstants,
+}

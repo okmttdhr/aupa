@@ -1,22 +1,41 @@
-import { COUNTER_INCREMENT } from 'constants'
+import request from 'superagent'
+import utils from 'utils'
+import constants from './constants'
 
-// ------------------------------------
-// Actions
-// ------------------------------------
-export function increment (value = 1) {
+export function getVideosAction() {
   return {
-    type: COUNTER_INCREMENT,
-    payload: value
+    type: constants.GET_VIDEOS,
   }
 }
 
-export const doubleAsync = () => {
+export function getVideosSuccessAction() {
+  return {
+    type: constants.GET_VIDEOS_SUCCESS,
+  }
+}
+
+export function getVideosFailureAction() {
+  return {
+    type: constants.GET_VIDEOS_FAILURE,
+  }
+}
+
+export const getVideos = () => {
   return (dispatch, getState) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        dispatch(increment(getState().counter))
-        resolve()
-      }, 200)
-    })
+    dispatch(getVideosAction())
+    request
+      .get(utils.uriSearch().youtube)
+      .query({
+        part: 'snippet',
+        key: utils.apiKey().youtube,
+      })
+      .end((err, res) => {
+        if (err) {
+          console.log(err)
+          dispatch(getVideosFailureAction())
+        }
+        console.log(res)
+        dispatch(getVideosSuccessAction())
+      })
   }
 }

@@ -1,5 +1,6 @@
 export function apiKey() {
   return {
+    youtube: 'AIzaSyA7J-vZr9KWMhzoTFmSccdqXtx8kYbEklc',
     giphy: 'dc6zaTOxFJmzC',
   }
 }

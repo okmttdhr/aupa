@@ -1,27 +1,14 @@
-import request from 'superagent'
-import utils from 'utils'
-request
-  .get(utils.uriSearch().youtube)
-  .query({
-    part: 'snippet',
-    key: utils.apiKey().youtube,
-  })
-  .end((err, res) => {
-    console.log(err)
-    console.log(res)
-  })
-
 import React from 'react'
 import { connect } from 'react-redux'
 
 import classes from './HomeView.scss'
 import DuckImage from '../assets/Duck.jpg'
 
-import { doubleAsync } from '../modules/videos'
+import videosModule from '../modules/videos'
 import Video from 'components/Video'
 
 const mapActionCreators = {
-  doubleAsync
+  getVideos: videosModule.getVideos,
 }
 
 const mapStateToProps = (state) => ({
@@ -37,19 +24,28 @@ const embedSrcTest = {
   vine: 'http://vine.co/v/57tP3HpJuqu/embed/simple',
 }
 
-export const HomeView = (props) => (
-  <div>
-    <img
-      alt='This is a duck, because Redux!'
-      className={classes.duck}
-      src={DuckImage} />
-    <h4>{JSON.stringify(props, '  ')}</h4>
-    <Video embedSrc={embedSrcTest.youtube} />
-    <Video embedSrc={embedSrcTest.giphy} />
-    <Video embedSrc={embedSrcTest.vimeo} />
-    <Video embedSrc={embedSrcTest.facebook} />
-    <Video embedSrc={embedSrcTest.vine} />
-  </div>
-)
+export class HomeView extends React.Component {
+  static propTypes = {
+    getVideos: React.PropTypes.func.isRequired,
+  }
+
+  componentDidMount() {
+    this.props.getVideos()
+  }
+
+  render() {
+    return (
+      <div>
+        <img className={classes.duck} src={DuckImage} />
+        <h4>{JSON.stringify(this.props, ' ')}</h4>
+        <Video embedSrc={embedSrcTest.youtube} />
+        <Video embedSrc={embedSrcTest.giphy} />
+        <Video embedSrc={embedSrcTest.vimeo} />
+        <Video embedSrc={embedSrcTest.facebook} />
+        <Video embedSrc={embedSrcTest.vine} />
+      </div>
+    )
+  }
+}
 
 export default connect(mapStateToProps, mapActionCreators)(HomeView)

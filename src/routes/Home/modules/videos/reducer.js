@@ -1,7 +1,18 @@
-import { COUNTER_INCREMENT } from 'constants'
+import constants from './constants'
 
 const ACTION_HANDLERS = {
-  [COUNTER_INCREMENT]: (state, action) => state + action.payload
+  [constants.GET_VIDEOS]: (state, action) => {
+    console.log('g')
+    return state
+  },
+  [constants.GET_VIDEOS_SUCCESS]: (state, action) => {
+    console.log('s')
+    return state
+  },
+  [constants.GET_VIDEOS_FAILURE]: (state, action) => {
+    console.log('f')
+    return state
+  },
 }
 
 const initialState = {

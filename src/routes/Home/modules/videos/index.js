@@ -5,14 +5,14 @@ import * as actions from './action'
 import reducer from './reducer'
 
 /**
- * import { increment, doubleAsync } from 'modules/videos'
+ * import videosModule from 'modules/videos'
  * eg.
    const mapActionCreators = {
-    increment: () => increment(1),
-    doubleAsync,
+    increment: () => videosModule.increment(1),
+    doubleAsync: videosModule.doubleAsync,
    }
- * import { reducer } from 'modules/videos'
- * eg. injectReducer(store, { key: 'videos', reducer })
+ * import videosModule from 'modules/videos'
+ * eg. injectReducer(store, { key: 'videos', videosModule.reducer })
  */
 export default {
   ...actions,
